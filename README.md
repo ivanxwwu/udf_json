@@ -26,7 +26,7 @@ mysql -uxxx -pxxx -hxxx -Pxxx
 drop function udf_json_get_value;
 drop function udf_json_array_length;
 create function udf_json_get_value returns string soname 'libudf_json.so';
-create function udf_json_array_length returns string soname 'libudf_json.so';
+create function udf_json_array_length returns integer soname 'libudf_json.so';
 ```
 
 # 使用示例
