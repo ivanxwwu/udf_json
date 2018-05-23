@@ -49,7 +49,7 @@ my_bool udf_json_get_value_init(UDF_INIT* initid, UDF_ARGS* args, char* message)
 void udf_json_get_value_deinit(UDF_INIT* initid)
 {
     void *void_ptr = initid->ptr;
-    Json *data = static_cast<Json*>(void_ptr);
+    char *data = static_cast<char*>(void_ptr);
     if (data)
         delete data;
 }
@@ -63,6 +63,7 @@ char* udf_json_get_value(UDF_INIT* initid, UDF_ARGS* args, char* result, unsigne
     {
         return NULL;
     }
+
     Json json(args->args[0], args->args[1]);
     if (!json.IsValid()) {
         return NULL;
@@ -83,7 +84,7 @@ my_bool udf_json_array_length_init(UDF_INIT* initid, UDF_ARGS* args, char* messa
 {
     if (args->arg_count != 2)
     {
-        strcpy(message,"wrong number of arguments: udf_json_get_value() requires two argument");
+        strcpy(message,"wrong number of arguments: udf_json_array_length() requires two argument");
         return 1;
     }
 
@@ -91,7 +92,7 @@ my_bool udf_json_array_length_init(UDF_INIT* initid, UDF_ARGS* args, char* messa
         || args->arg_type[1] != STRING_RESULT
             )
     {
-        strcpy(message,"udf_json_get_value() requires two string as parameter");
+        strcpy(message,"udf_json_array_length() requires two string as parameter");
         return 1;
     }
 
