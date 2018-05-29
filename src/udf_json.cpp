@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <algorithm>
-
 #include "Json.h"
 
 extern "C"
@@ -64,7 +63,7 @@ char* udf_json_get_value(UDF_INIT* initid, UDF_ARGS* args, char* result, unsigne
         return NULL;
     }
 
-    Json json(args->args[0], args->args[1]);
+    Json json(std::string(args->args[0], args->lengths[0]), std::string(args->args[1], args->lengths[1]));
     if (!json.IsValid()) {
         return NULL;
     }
@@ -115,7 +114,7 @@ long long udf_json_array_length(UDF_INIT* initid, UDF_ARGS* args, char* result, 
     {
         return 0;
     }
-    Json json(args->args[0], args->args[1]);
+    Json json(std::string(args->args[0], args->lengths[0]), std::string(args->args[1], args->lengths[1]));
     if (!json.IsValid()) {
         return 0;
     }
